@@ -16,7 +16,7 @@ export const ModalContainer = styled.div`
   min-width: 400px;
   margin: 0 auto;
   padding: 40px 20px;
-  background: white;
+  background-color: ${(props) => props.theme.colors.secondary};
   border-radius: 10px;
   display: flex;
   flex-direction: column;
