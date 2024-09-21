@@ -8,9 +8,11 @@ import { ReactComponent as IconX } from "../../assets/svgs/icon-x.svg";
 import { ReactComponent as IconXOutline } from "../../assets/svgs/icon-x-outline.svg";
 import { ReactComponent as IconO } from "../../assets/svgs/icon-o.svg";
 import { ReactComponent as IconOOutline } from "../../assets/svgs/icon-o-outline.svg";
+import { SoundEffectsContext } from "../../contexts/SoundEffectsContext";
 
 const GameCell = ({ cellItem, index }) => {
   const { updateBoard, game, roundComplete } = useContext(GameContext);
+  const { hoverSfx, winSfx, completedSfx } = useContext(SoundEffectsContext);
   const { handleModal } = useContext(ModalContext);
 
   const cellClickHandler = () => {
@@ -18,6 +20,11 @@ const GameCell = ({ cellItem, index }) => {
     const result = checkForWinner(game.board);
     if (result) {
       roundComplete(result)
+      if(result !== "draw") {
+        winSfx();
+      } else {
+        completedSfx();
+      }
       handleModal(<RoundOverModal />);
     }
   };
@@ -36,7 +43,7 @@ const GameCell = ({ cellItem, index }) => {
     );
   }
   return (
-    <CellStyle onClick={cellClickHandler}>
+    <CellStyle onClick={cellClickHandler} onMouseEnter={() => hoverSfx()}>
       {game.turn === "X" ? (
         <IconXOutline className="outlineIcon" />
       ) : (

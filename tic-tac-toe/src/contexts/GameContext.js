@@ -8,17 +8,17 @@ export const GameContextProvider = (props) => {
     board: [null, null, null, null, null, null, null, null, null],
     player1: {
       choice: "X",
-      name: "Akhil",
+      name: "Player 1",
       score: 0,
       color: "#8437f9",
-      avatarConfig: genConfig()
+      avatarConfig: genConfig(),
     },
     player2: {
       choice: "O",
-      name: "Harjot",
+      name: "Player 2",
       score: 0,
       color: "#f9c811",
-      avatarConfig: genConfig()
+      avatarConfig: genConfig(),
     },
     turn: "X",
     roundWinner: "",
@@ -39,6 +39,28 @@ export const GameContextProvider = (props) => {
       ...game,
       board: [null, null, null, null, null, null, null, null, null],
       turn: "X",
+    });
+  };
+
+  const restartGame = () => {
+    setGame({
+      board: [null, null, null, null, null, null, null, null, null],
+      player1: {
+        choice: "X",
+        name: "Player 1",
+        score: 0,
+        color: "#8437f9",
+        avatarConfig: genConfig(),
+      },
+      player2: {
+        choice: "O",
+        name: "Player 2",
+        score: 0,
+        color: "#f9c811",
+        avatarConfig: genConfig(),
+      },
+      turn: "X",
+      roundWinner: "",
     });
   };
 
@@ -101,7 +123,7 @@ export const GameContextProvider = (props) => {
 
   return (
     <GameContext.Provider
-      value={{ game, updateBoard, resetBoard, roundComplete }}
+      value={{ game, updateBoard, resetBoard, roundComplete, restartGame }}
     >
       {props.children}
     </GameContext.Provider>
