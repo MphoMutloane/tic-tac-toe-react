@@ -10,24 +10,25 @@ import { ReactComponent as IconO } from "../../assets/svgs/icon-o.svg";
 import { ReactComponent as IconOOutline } from "../../assets/svgs/icon-o-outline.svg";
 import { SoundEffectsContext } from "../../contexts/SoundEffectsContext";
 
-const GameCell = ({ cellItem, index }) => {
+const GameCell = ({ cellItem, index,}) => {
   const { updateBoard, game, roundComplete } = useContext(GameContext);
   const { hoverSfx, winSfx, completedSfx } = useContext(SoundEffectsContext);
   const { handleModal } = useContext(ModalContext);
 
   const cellClickHandler = () => {
-    updateBoard(index);
-    const result = checkForWinner(game.board);
+    updateBoard(index); 
+
+    const result = checkForWinner(game.board); 
     if (result) {
-      roundComplete(result)
-      if(result !== "draw") {
-        winSfx();
-      } else {
-        completedSfx();
-      }
-      handleModal(<RoundOverModal />);
+        roundComplete(result);
+        if (result !== "draw") {
+            winSfx();
+        } else {
+            completedSfx();
+        }
+        handleModal(<RoundOverModal />);
     }
-  };
+};
 
   if (cellItem === "X") {
     return (
@@ -42,6 +43,7 @@ const GameCell = ({ cellItem, index }) => {
       </CellStyle>
     );
   }
+
   return (
     <CellStyle onClick={cellClickHandler} onMouseEnter={() => hoverSfx()}>
       {game.turn === "X" ? (
