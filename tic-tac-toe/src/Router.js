@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { HashRouter, Route, Routes } from "react-router-dom"; // Import HashRouter
 import Home from "./pages/Home/Home";
 import Details from "./pages/Details/Details";
 import Game from "./pages/Game/Game";
@@ -9,7 +9,8 @@ import { ModalContextProvider } from "./contexts/ModalContext";
 const Router = () => {
   return (
     <div>
-      <BrowserRouter>
+      {/* Replace BrowserRouter with HashRouter */}
+      <HashRouter>
         <ModalContextProvider>
           <Header />
           <Routes>
@@ -18,7 +19,7 @@ const Router = () => {
             <Route path="/game-on" element={<Game />} />
           </Routes>
         </ModalContextProvider>
-      </BrowserRouter>
+      </HashRouter>
     </div>
   );
 };
